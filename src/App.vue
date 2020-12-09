@@ -8,13 +8,11 @@
 </template>
 
 <script>
-
-import {db} from './main';
 export default {
   name: 'App',
   mounted(){
-    db.collection("pacientes").get().then(respuesta => console.log(respuesta))
-  }
+    this.$store.dispatch('traerData');
+  },
 }
 </script>
 

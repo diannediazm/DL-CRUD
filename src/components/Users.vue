@@ -1,7 +1,7 @@
 <template>
   <div class="container text-left">
-    <h1 class="text-center">Creación y edición de usuarios</h1>
-    <b-form v-if="show" class="mb-4">
+    <h1 class="text-center mb-5">Creación y edición de usuarios</h1>
+    <b-form v-if="show" class="mb-5" @submit.prevent="agregar">
        <b-form-group id="input-group-1" label="Nombre" label-for="input-1">
         <b-form-input
           id="input-1"
@@ -22,7 +22,7 @@
       
       <b-form-group
         id="input-group-3"
-        label="Correo electrónico"
+        label="Email"
         label-for="input-3"
         description="No compartiremos tus datos"
       >
@@ -31,11 +31,11 @@
           v-model="form.email"
           type="email"
           required
-          placeholder="Escribe tu correo"
+          placeholder="Escribe tu correo electrónico"
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="success" class="mr-2">Ingresar</b-button>
+      <b-button type="submit" variant="success" class="mr-2">Agregar</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
       
@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Users',
   data() {
     return {
       form: {
@@ -54,7 +54,16 @@ export default {
       },
       show: true
     }
-  }
+  },
+  methods: {
+    agregar() {
+      if (this.form.name && this.form.lastname && this.form.email){
+        this.$store.dispatch('agregandoPacientes', this.form)
+      } else {
+        console.log('no carga');
+      }
+    }
+  },
 }
 </script>
 
