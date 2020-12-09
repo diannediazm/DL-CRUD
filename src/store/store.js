@@ -19,12 +19,12 @@ export default new Vuex.Store({
   },
   actions: {
     traerData({commit}) {
-      db.collection("pacientes").get().then(respuesta => {
+      db.collection("pacientes").onSnapshot(respuesta => {
         let arreglo = [];
         respuesta.forEach(element => {
           arreglo.push({
-            nombre: element.data().name,
-            apellido: element.data().lastname,
+            name: element.data().name,
+            lastname: element.data().lastname,
             email: element.data().email,
             id: element.id
           }) 
@@ -34,11 +34,18 @@ export default new Vuex.Store({
     },
     agregandoPacientes(context,data){
       db.collection("pacientes").add({
-        nombre: data.name,
-        apellido: data.lastname,
+        name: data.name,
+        lastname: data.lastname,
         email: data.email
       }).then(resp => {
         console.log(resp);
+      })
+    },
+    eliminarPaciente(context, id) {
+      db.collection("pacientes").doc(id).delete().then(() => {
+        console.log('Paciente eliminado');
+      }).catch (error => {
+        console.log(error);
       })
     }
   },
