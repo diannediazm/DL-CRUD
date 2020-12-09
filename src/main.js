@@ -12,7 +12,8 @@ Vue.config.productionTip = false;
 firebase.initializeApp(firebaseConfig);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
-firebase.initializeApp(firebaseConfig);
+
+export const db = firebase.firestore();
 
 new Vue({
   router,

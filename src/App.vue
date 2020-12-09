@@ -1,12 +1,22 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+
+import {db} from './main';
+export default {
+  name: 'App',
+  mounted(){
+    db.collection("pacientes").get().then(respuesta => console.log(respuesta))
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
